@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A practical website audit kit for freelancers and small agencies: checklist, scorecard, sample client report, and fulfillment SOP.">
+  <title>Website Audit Kit for Freelancers</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #161a2b;
+      --muted: #667085;
+      --paper: #fbf7ef;
+      --surface: #ffffff;
+      --surface-2: #f6efe4;
+      --line: #e7dccd;
+      --accent: #3157d5;
+      --accent-dark: #21399a;
+      --accent-soft: #eaf0ff;
+      --ok: #067647;
+      --shadow: 0 24px 70px rgba(22, 26, 43, .12);
+      --radius: 24px;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(49,87,213,.14), transparent 36rem),
+        linear-gradient(180deg, #fffaf1 0%, var(--paper) 38%, #f7f9fc 100%);
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      backdrop-filter: blur(18px);
+      background: rgba(251,247,239,.78);
+      border-bottom: 1px solid rgba(231,220,205,.74);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 72px; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -.02em; }
+    .mark { width: 34px; height: 34px; border-radius: 11px; background: var(--ink); color: white; display: grid; place-items: center; font-size: 17px; }
+    .navlinks { display: flex; align-items: center; gap: 18px; color: var(--muted); font-weight: 650; font-size: 14px; }
+    .navlinks a { text-decoration: none; }
+    .button, button.button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+      text-decoration: none;
+      border: 1px solid rgba(0,0,0,.08);
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(22, 26, 43, .16);
+    }
+    .button.secondary { background: white; color: var(--ink); box-shadow: none; border-color: var(--line); }
+    .button.accent { background: var(--accent); box-shadow: 0 16px 30px rgba(49, 87, 213, .22); }
+    .hero { padding: 88px 0 58px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr); gap: 38px; align-items: center; }
+    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: .12em; font-weight: 900; font-size: 12px; }
+    h1 { font-size: clamp(44px, 7vw, 86px); line-height: .92; letter-spacing: -.068em; margin: 16px 0 20px; max-width: 820px; }
+    .subhead { font-size: clamp(18px, 2vw, 23px); color: #475467; max-width: 720px; margin: 0 0 28px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .micro { color: var(--muted); font-size: 13px; margin-top: 14px; }
+    .product-card {
+      background: rgba(255,255,255,.88);
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      transform: rotate(1deg);
+    }
+    .report-preview {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      transform: rotate(-1deg);
+    }
+    .preview-top { display: flex; justify-content: space-between; gap: 12px; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 18px; }
+    .pill { display: inline-flex; border-radius: 999px; padding: 6px 10px; background: var(--accent-soft); color: var(--accent-dark); font-weight: 800; font-size: 12px; }
+    .score { font-size: 56px; font-weight: 900; letter-spacing: -.06em; }
+    .score small { font-size: 15px; color: var(--muted); letter-spacing: 0; }
+    .bar { height: 12px; border-radius: 999px; background: #edf1f7; overflow: hidden; margin: 10px 0; }
+    .bar span { display: block; height: 100%; background: var(--accent); border-radius: inherit; }
+    section { padding: 56px 0; }
+    h2 { font-size: clamp(32px, 4vw, 54px); line-height: 1; letter-spacing: -.05em; margin: 0 0 18px; }
+    .section-lede { color: var(--muted); font-size: 18px; max-width: 720px; margin: 0 0 26px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .card {
+      background: rgba(255,255,255,.84);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .card h3 { font-size: 20px; margin: 0 0 8px; letter-spacing: -.02em; }
+    .card p, .card li { color: #475467; }
+    .card p { margin: 0; }
+    .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 11px; }
+    .list li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; }
+    .check { width: 28px; height: 28px; border-radius: 50%; background: #ecfdf3; color: var(--ok); display: grid; place-items: center; font-weight: 900; }
+    .band {
+      background: var(--ink);
+      color: white;
+      border-radius: 34px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+      gap: 26px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+    .band p { color: rgba(255,255,255,.76); }
+    .steps { counter-reset: step; display: grid; gap: 14px; }
+    .step { position: relative; padding: 22px 22px 22px 70px; background: white; border: 1px solid var(--line); border-radius: 20px; }
+    .step:before { counter-increment: step; content: counter(step); position: absolute; left: 20px; top: 20px; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: white; display: grid; place-items: center; font-weight: 900; }
+    .step h3 { margin: 0 0 4px; }
+    .step p { margin: 0; color: var(--muted); }
+    .price { font-size: 42px; font-weight: 900; letter-spacing: -.05em; margin: 10px 0; }
+    .note { font-size: 13px; color: var(--muted); }
+    footer { padding: 34px 0 56px; color: var(--muted); font-size: 14px; }
+    footer .wrap { border-top: 1px solid var(--line); padding-top: 22px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    @media (max-width: 860px) {
+      .hero-grid, .grid-3, .grid-2, .band { grid-template-columns: 1fr; }
+      .navlinks a:not(.button) { display: none; }
+      .hero { padding-top: 58px; }
+      .product-card { transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Website Audit Kit home"><span class="mark">A</span><span>Audit Kit</span></a>
+      <div class="navlinks">
+        <a href="#inside">Inside</a>
+        <a href="#process">Process</a>
+        <a href="#launch-options">Launch</a>
+        <a class="button secondary" href="#next-step">Get the kit</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">For freelancers, consultants & small agencies</div>
+          <h1>Turn a messy website review into a polished client audit.</h1>
+          <p class="subhead">A practical toolkit for evaluating homepage clarity, conversion friction, credibility, mobile usability, accessibility basics, and lead capture — without starting from a blank doc.</p>
+          <div class="hero-actions">
+            <a class="button accent" href="#next-step">Set up download / checkout</a>
+            <a class="button secondary" href="#inside">See what’s included</a>
+          </div>
+          <p class="micro">Draft landing page prepared locally. Replace the CTA with your Gumroad, Ko-fi, Payhip, Stripe, or direct-download link before publishing.</p>
+        </div>
+        <aside class="product-card" aria-label="Sample report preview">
+          <div class="report-preview">
+            <div class="preview-top">
+              <div>
+                <span class="pill">Sample report</span>
+                <h3>Homepage Conversion Audit</h3>
+              </div>
+              <div class="score">24<small>/40</small></div>
+            </div>
+            <p><strong>Top priority:</strong> clarify the hero section and primary CTA.</p>
+            <div class="bar" aria-hidden="true"><span style="width: 60%"></span></div>
+            <p class="note">Includes scorecard, priority findings, suggested hero rewrite, and implementation sequence.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="inside">
+      <div class="wrap">
+        <h2>Everything needed for a repeatable 60-minute audit.</h2>
+        <p class="section-lede">Use the kit as a lead magnet, paid digital product, or fulfillment asset for a productized website teardown service.</p>
+        <div class="grid-3">
+          <div class="card"><h3>Audit checklist</h3><p>Step-by-step review prompts across positioning, offer clarity, trust, mobile, accessibility, discoverability, lead capture, and technical basics.</p></div>
+          <div class="card"><h3>Scoring rubric</h3><p>Spreadsheet-ready 0/1/2 scorecard so findings are easier to explain and prioritize.</p></div>
+          <div class="card"><h3>Sample report</h3><p>A client-facing HTML report template with executive summary, priority findings, rewrite sample, and implementation sequence.</p></div>
+          <div class="card"><h3>Fulfillment SOP</h3><p>A concise workflow for delivering a useful audit without overpromising outcomes.</p></div>
+          <div class="card"><h3>Sales copy</h3><p>Draft listing copy, positioning, buyer fit, and ethical usage notes.</p></div>
+          <div class="card"><h3>Launch-ready site</h3><p>This page can be deployed as a simple static website on Cloudflare Pages, GitHub Pages, Netlify, or a conventional web host.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap band">
+        <div>
+          <div class="eyebrow" style="color:#9db3ff">Ethical positioning</div>
+          <h2>Specific recommendations, not fake guarantees.</h2>
+          <p>The kit is designed to help buyers observe, prioritize, and communicate website improvements. It avoids claims about guaranteed rankings, conversion lifts, or revenue.</p>
+        </div>
+        <ul class="list">
+          <li><span class="check">✓</span><span>Evidence-based findings</span></li>
+          <li><span class="check">✓</span><span>Clear now / next / monitor prioritization</span></li>
+          <li><span class="check">✓</span><span>Client-safe language and scope boundaries</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="wrap grid-2">
+        <div>
+          <h2>How a buyer uses it.</h2>
+          <p class="section-lede">A practical process that turns observations into a credible report.</p>
+        </div>
+        <div class="steps">
+          <div class="step"><h3>Review the site</h3><p>Capture first impression, primary CTA, trust signals, mobile friction, accessibility basics, and lead capture flow.</p></div>
+          <div class="step"><h3>Score the findings</h3><p>Use the rubric to turn vague opinions into a prioritized scorecard.</p></div>
+          <div class="step"><h3>Package the report</h3><p>Summarize top issues, quick wins, and a simple implementation sequence.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="launch-options">
+      <div class="wrap">
+        <h2>Recommended launch path.</h2>
+        <p class="section-lede">For a zero-budget launch, use free static hosting plus a separate product/payment link if you want to sell the kit.</p>
+        <div class="grid-3">
+          <div class="card"><h3>Best zero-cost host</h3><div class="price">$0</div><p>Cloudflare Pages or GitHub Pages for the landing page.</p></div>
+          <div class="card"><h3>Payment/download</h3><div class="price">Link</div><p>Replace the CTA with Gumroad, Ko-fi, Payhip, Stripe, or a direct download link after you approve the channel.</p></div>
+          <div class="card"><h3>Optional domain</h3><div class="price">Later</div><p>Use a free pages.dev/github.io URL first; add a custom domain only after the offer shows traction.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="next-step">
+      <div class="wrap band">
+        <div>
+          <h2>Ready to publish?</h2>
+          <p>Before this page goes live, replace this call-to-action with your approved checkout or download URL. If selling, set up payment/tax/bank details yourself inside the chosen platform.</p>
+        </div>
+        <a class="button" href="mailto:YOUR_EMAIL@example.com?subject=Website%20Audit%20Kit">Replace with checkout link</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>Website Audit Kit landing page draft.</span>
+      <span>No guaranteed SEO, conversion, lead, or revenue outcomes are claimed.</span>
+    </div>
+  </footer>
+</body>
+</html>
